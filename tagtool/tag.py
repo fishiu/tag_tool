@@ -13,7 +13,8 @@ tag convertor
 import re
 import json
 from tagtool import db
-from routes import Article
+from tagtool.routes import Article
+from tqdm import tqdm
 
 
 def find_key(abstract, keylist):
@@ -63,13 +64,14 @@ if __name__ == '__main__':
     keys = json.loads(open("./statics/new_keys.json", "r").read())
     articles = json.loads(open("./statics/articleInfo.json", "r").read())
     xml_abstracts = []
-    for idx, article in enumerate(articles[0:50]):
-        print(articles.index(article))
+    for idx, article in tqdm(enumerate(articles[0:1000])):
+        # print(articles.index(article))
         key_dict = keys + [key.lower() for key in article.get("keys", []) if key]
         d = {i: 1 for i in key_dict}
-        # db_article = Article()
-        db_article = Article.query.get(idx)
-        db_article.id = idx
+        db_article = Article()
+        # db_article = Article.query.get(idx)
+        db_article.id = idx + 1
         db_article.xml = find_key(article["abstract"], d)
+        db_article.title = article['title']
         db.session.add(db_article)
         db.session.commit()
