@@ -1,0 +1,7 @@
+{
+  "python.pythonPath": "/root/miniconda3/envs/flask/bin/python",
+  "python.envFile": "${workspaceFolder}/.env",
+  "terminal.integrated.env.linux": {
+      "PYTHONPATH": "$PYTHONPATH:${workspaceFolder}"
+  }
+}
