@@ -15,10 +15,6 @@
           font-size: 18px;
           line-height: 43px;
           position: relative;
-          -webkit-user-select: none;
-          -moz-user-select: none;
-          -o-user-select: none;
-          user-select: none;
       }
 
       .buttons-div p {
@@ -66,6 +62,11 @@
           border-radius: 5px;
           cursor: pointer;
           position: relative;
+
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -o-user-select: none;
+          user-select: none;
       }
 
       .keyphrase.task {
@@ -152,7 +153,7 @@
 </div>
 <div class="abstract-div panel panel-default">
   <div class="panel-body">
-    <p>第 <span id="article-id" class="keypress">{{ article.id + 1 }}</span> 篇</p>
+    <p>第 <span id="article-id" class="keypress">{{ article.id }}</span> 篇 {{ article.title }}</p>
     <p id="article-content">{{ article.xml | safe }}</p>
   </div>
 </div>
@@ -173,7 +174,7 @@
                 console.log(data)
             },
             error: function (data) {
-                alert('get record error')
+                alert('ajax error')
             }
         })
     }
@@ -184,6 +185,8 @@
         var focusIndex = 0;
         $(".focus").removeClass("focus");
         $(keyphrases[focusIndex]).addClass("focus");
+
+        // keyphrases.dblclick(function (e){console.log('dbclick');return false;})
 
         // 点击方式标注
         $(".keyphrase").click(function () {

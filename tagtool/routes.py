@@ -17,9 +17,11 @@ from sqlalchemy import TEXT
 
 class Article(db.Model):
     __tablename__ = 'article'
+    __table_args__ = dict(extend_existing=True)
     id = db.Column(db.Integer, primary_key=True)
     xml = db.Column(TEXT)
     done = db.Column(db.BOOLEAN)
+    title = db.Column(TEXT)
 
     def __repr__(self):
         return f'<Article {self.id}>'
@@ -49,6 +51,5 @@ def save():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
-    # db.drop_all()
-    # db.create_all()
+    db.drop_all()
+    db.create_all()
